@@ -385,27 +385,37 @@
           <section class="card reveal lab-wide" aria-labelledby="promptTitle">
             <div class="card-head">
               <h3 id="promptTitle">Banco de Prompts IA</h3>
-              <p class="muted">Selector por categoría + copiar (edita/añade los tuyos)</p>
+              <p class="muted">50 categorías · 500 prompts · buscar y copiar</p>
             </div>
 
             <div class="prompt-controls">
               <label class="field">
+                <span>Buscar (título o contenido)</span>
+                <input id="promptSearch" type="text" placeholder="Ej.: DAFO, presupuesto, contrato…" />
+              </label>
+
+              <label class="field">
                 <span>Categoría</span>
                 <select id="promptCategory"></select>
               </label>
+
               <label class="field">
                 <span>Prompt</span>
                 <select id="promptSelect"></select>
               </label>
+
               <div class="prompt-actions">
-                <button class="button ghost" id="promptCopy" type="button">Copiar</button>
+                <button class="button ghost" id="promptRandom" type="button">Aleatorio</button>
+                <button class="button primary" id="promptCopy" type="button">Copiar</button>
               </div>
             </div>
 
-            <pre class="prompt-view" id="promptView">Selecciona un prompt para ver su contenido</pre>
+            <div class="muted small" id="promptCount"></div>
+
+            <pre class="prompt-view" id="promptView">Cargando prompts…</pre>
             <div class="toast" id="toast" role="status" aria-live="polite" aria-hidden="true">Copiado</div>
           </section>
-        </div>
+</div>
       </div>
     </section>
 

@@ -308,57 +308,6 @@
     });
   }
 
-  // Prompt bank
-  const promptCategory = document.getElementById('promptCategory');
-  const promptSelect = document.getElementById('promptSelect');
-  const promptView = document.getElementById('promptView');
-  const promptCopy = document.getElementById('promptCopy');
-
-  const promptData = {
-    "Documentación empresarial":[
-      {title:"Reglamento interno", text:"Actúa como responsable de RR. HH. Redacta un reglamento interno para una pyme en España (20-50 empleados). Incluye: horarios, permisos, conducta, uso de recursos, PRL, confidencialidad, procedimiento disciplinario y anexos. Lenguaje formal, apartados numerados. Añade checklist final para revisión legal."},
-      {title:"Contrato laboral básico", text:"Redacta un contrato laboral básico en España para un puesto administrativo junior. Incluye: datos a completar, jornada, periodo de prueba, salario, funciones, confidencialidad y protección de datos. Añade notas para verificación con normativa vigente."},
-      {title:"Factura/Presupuesto", text:"Genera una plantilla de presupuesto y factura (estructura, campos y condiciones) para una pyme. Incluye: conceptos, base, IVA, total, condiciones de pago y validez. Formato profesional, editable."}
-    ],
-    "Marketing y digital":[
-      {title:"Plan de marketing digital", text:"Elabora un plan de marketing digital para una pyme local en Murcia: objetivos SMART, buyer persona, propuesta de valor, canales, calendario mensual, presupuesto, KPI y embudo awareness→conversión. Realista y medible."},
-      {title:"DAFO con estrategias", text:"Realiza un DAFO de una empresa local (elige ejemplo plausible) y cierra con 4 estrategias: FO, FA, DO, DA. Evita generalidades y justifica con evidencia."},
-      {title:"Calendario de contenidos", text:"Crea un calendario de contenidos de 4 semanas (IG/LinkedIn) para una pyme, con temática, formato, objetivo y KPI por publicación."}
-    ],
-    "Economía aplicada":[
-      {title:"Caso práctico IPC", text:"Crea un caso práctico breve para explicar IPC e inflación: datos ficticios, 3 preguntas y solución razonada."},
-      {title:"KPI y cuadro de mando", text:"Diseña un cuadro de mando básico para una pyme: 8 KPI, definición, fórmula y frecuencia. Incluye ejemplo en tabla."}
-    ]
-  };
-
-  function fillCategories(){
-    if(!promptCategory || !promptSelect) return;
-    const cats = Object.keys(promptData);
-    promptCategory.innerHTML = cats.map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join('');
-    fillPrompts(cats[0]);
-  }
-
-  function fillPrompts(cat){
-    const items = promptData[cat] || [];
-    promptSelect.innerHTML = items.map((p, i)=>`<option value="${i}">${esc(p.title)}</option>`).join('');
-    if(items.length){
-      promptView.textContent = items[0].text;
-    } else {
-      promptView.textContent = 'No hay prompts en esta categoría.';
-    }
-  }
-
-  if(promptCategory && promptSelect && promptView){
-    fillCategories();
-    promptCategory.addEventListener('change', () => fillPrompts(promptCategory.value));
-    promptSelect.addEventListener('change', () => {
-      const cat = promptCategory.value;
-      const idx = Number(promptSelect.value);
-      const item = (promptData[cat]||[])[idx];
-      promptView.textContent = item ? item.text : 'Selecciona un prompt para ver su contenido';
-    });
-  }
-
   // copy with toast
   const toast = document.getElementById('toast');
   let toastTimer = null;
@@ -403,4 +352,106 @@
       showToast(ok ? 'Email copiado' : 'No se pudo copiar');
     });
   }
+
+  // ---- PROMPT BANK (JSON: 50 categorías / 500 prompts) ----
+  async function initPromptBank(){
+    const elCat = document.getElementById('promptCategory');
+    const elSel = document.getElementById('promptSelect');
+    const elView = document.getElementById('promptView');
+    const elCopy = document.getElementById('promptCopy');
+    const elRandom = document.getElementById('promptRandom');
+    const elSearch = document.getElementById('promptSearch');
+    const elCount = document.getElementById('promptCount');
+
+    if(!elCat || !elSel || !elView) return;
+
+    let data;
+    try{
+      const res = await fetch('./data/prompts.json', { cache: 'no-store' });
+      if(!res.ok) throw new Error('No se pudo cargar prompts.json');
+      data = await res.json();
+    }catch(e){
+      elView.textContent = 'Error cargando /data/prompts.json. Revisa que exista y que sea JSON válido.';
+      return;
+    }
+
+    const categories = Object.keys(data).sort((a,b)=>a.localeCompare(b,'es'));
+    const flat = [];
+    for(const c of categories){
+      const arr = Array.isArray(data[c]) ? data[c] : [];
+      for(const p of arr){
+        if(!p) continue;
+        flat.push({
+          category: c,
+          title: String(p.title || 'Sin título'),
+          text: String(p.text || '')
+        });
+      }
+    }
+
+    function escapeHtml(s){
+      return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
+    }
+
+    function promptsFor(category, query){
+      const q = (query || '').trim().toLowerCase();
+      const list = flat.filter(p => p.category === category);
+      if(!q) return list;
+      return list.filter(p =>
+        p.title.toLowerCase().includes(q) ||
+        p.text.toLowerCase().includes(q)
+      );
+    }
+
+    function currentList(){
+      return promptsFor(elCat.value, elSearch ? elSearch.value : '');
+    }
+
+    function renderCategories(){
+      elCat.innerHTML = categories.map(c => `<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`).join('');
+    }
+
+    function renderPrompts(list){
+      elSel.innerHTML = list.map((p, i) => `<option value="${i}">${escapeHtml(p.title)}</option>`).join('');
+      if(list.length){
+        elView.textContent = list[0].text;
+        if(elCount) elCount.textContent = `${list.length} prompts en esta categoría (filtrados).`;
+      }else{
+        elView.textContent = 'No hay resultados con ese filtro.';
+        if(elCount) elCount.textContent = '0 resultados.';
+      }
+    }
+
+    function setViewFromIndex(i){
+      const list = currentList();
+      const item = list[i];
+      elView.textContent = item ? item.text : 'Selecciona un prompt para ver su contenido';
+    }
+
+    renderCategories();
+    renderPrompts(currentList());
+
+    elCat.addEventListener('change', () => renderPrompts(currentList()));
+    elSel.addEventListener('change', () => setViewFromIndex(Number(elSel.value)));
+    if(elSearch){
+      elSearch.addEventListener('input', () => renderPrompts(currentList()));
+    }
+    if(elRandom){
+      elRandom.addEventListener('click', () => {
+        const list = currentList();
+        if(!list.length) return;
+        const i = Math.floor(Math.random() * list.length);
+        elSel.value = String(i);
+        setViewFromIndex(i);
+      });
+    }
+    if(elCopy){
+      elCopy.addEventListener('click', async () => {
+        const ok = await copyText(elView.textContent || '');
+        showToast(ok ? 'Prompt copiado' : 'No se pudo copiar');
+      });
+    }
+  }
+  initPromptBank();
+
 })();

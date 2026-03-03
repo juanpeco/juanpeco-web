@@ -1,0 +1,30 @@
+{
+  "_INSTRUCCIONES_": [
+    {
+      "title": "Cómo rellenar este archivo",
+      "text": "Sustituye este contenido por tus 50 categorías y 500 prompts. Formato: {\"Categoria\":[{\"title\":\"...\",\"text\":\"...\"}, ...], ...}. Mantén comillas dobles y JSON válido."
+    }
+  ],
+  "Documentación empresarial": [
+    {
+      "title": "Reglamento interno",
+      "text": "Actúa como responsable de RR. HH. Redacta un reglamento interno para una pyme en España (20-50 empleados). Incluye: horarios, permisos, conducta, uso de recursos, PRL, confidencialidad, procedimiento disciplinario y anexos. Apartados numerados. Añade checklist final para revisión legal."
+    },
+    {
+      "title": "Contrato laboral básico",
+      "text": "Redacta un contrato laboral básico en España para un puesto administrativo junior. Incluye: datos a completar, jornada, periodo de prueba, salario, funciones, confidencialidad y protección de datos. Añade notas para verificación con normativa vigente."
+    }
+  ],
+  "Economía aplicada": [
+    {
+      "title": "Caso práctico PIB",
+      "text": "Crea un caso práctico breve para explicar el PIB con datos ficticios, 3 preguntas y solución razonada."
+    }
+  ],
+  "Marketing y digital": [
+    {
+      "title": "Plan de marketing digital",
+      "text": "Elabora un plan de marketing digital para una pyme local en Murcia: objetivos SMART, buyer persona, propuesta de valor, canales, calendario mensual, presupuesto, KPI y embudo awareness→conversión. Realista y medible."
+    }
+  ]
+}

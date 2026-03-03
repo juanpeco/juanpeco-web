@@ -1,13 +1,16 @@
 /* Modern, clean, responsive — inspired by your Canva structure */
 :root{
-  --bg:#fff;
-  --alt:#f3f4f6;
-  --ink:#0f172a;
-  --muted:rgba(15,23,42,.68);
-  --line:rgba(15,23,42,.12);
-  --accent:#1e3a8a;
-  --accent2:#2563eb;
-  --shadow:0 12px 40px rgba(15,23,42,.10);
+  /* Palette inspired by juanpeco.es: clean whites, soft grays, vivid blue accent */
+  --bg:#ffffff;
+  --alt:#f7f9fc;
+  --ink:#0b1220;
+  --muted:rgba(11,18,32,.66);
+  --line:rgba(11,18,32,.10);
+  --accent:#2563eb;   /* vivid blue */
+  --accent2:#60a5fa;  /* light blue */
+  --accent3:#1e3a8a;  /* deep blue */
+  --shadow:0 10px 30px rgba(11,18,32,.08);
+  --shadow2:0 18px 60px rgba(37,99,235,.14);
   --radius:18px;
   --container:1120px;
 }
@@ -31,7 +34,7 @@ a:hover{text-decoration:underline}
 
 .site-header{
   position:sticky;top:0;z-index:50;
-  background:rgba(255,255,255,.84);
+  background:rgba(255,255,255,.88);
   backdrop-filter:blur(12px);
   border-bottom:1px solid var(--line);
 }
@@ -56,12 +59,30 @@ a:hover{text-decoration:underline}
 .nav-link.cta{background:var(--ink);color:#fff}
 .nav-link.cta:hover{background:#0b1223}
 
-.section{padding:78px 0}
-.section.alt{background:var(--alt);border-top:1px solid rgba(15,23,42,.06);border-bottom:1px solid rgba(15,23,42,.06)}
+.section{padding:86px 0}
+.section.alt{background:var(--alt);border-top:1px solid rgba(11,18,32,.06);border-bottom:1px solid rgba(11,18,32,.06)}
 .section-head{margin-bottom:22px}
-.section-head h2{margin:0 0 8px;letter-spacing:-.02em;font-size:clamp(22px,2.4vw,30px)}
+.section-head h2{margin:0 0 8px;letter-spacing:-.02em;font-size:clamp(24px,2.6vw,34px)}
 
-.hero{padding-top:54px}
+
+.hero{
+  padding-top:54px;
+  position:relative;
+  overflow:hidden;
+}
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:-120px -80px auto -80px;
+  height:420px;
+  background:
+    radial-gradient(600px 280px at 20% 40%, rgba(96,165,250,.28), transparent 60%),
+    radial-gradient(520px 260px at 70% 10%, rgba(37,99,235,.22), transparent 58%),
+    radial-gradient(520px 320px at 80% 80%, rgba(30,58,138,.18), transparent 60%);
+  pointer-events:none;
+}
+.hero-grid{position:relative; z-index:1}
+
 .hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:22px;align-items:start}
 .eyebrow{display:inline-flex;font-weight:900;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:rgba(30,58,138,.92);margin:0 0 12px}
 .hero-title{margin:0;font-size:clamp(34px,4vw,54px);line-height:1.05;letter-spacing:-.04em}
@@ -111,7 +132,7 @@ a:hover{text-decoration:underline}
   transition:transform .12s ease, box-shadow .12s ease, background .12s ease}
 .button:hover{transform:translateY(-1px)}
 .button:active{transform:translateY(0)}
-.button.primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;box-shadow:0 16px 40px rgba(30,58,138,.22)}
+.button.primary{background:linear-gradient(135deg,var(--accent3),var(--accent));color:#fff;box-shadow:var(--shadow2)}
 .button.primary:hover{text-decoration:none;box-shadow:0 18px 52px rgba(30,58,138,.28)}
 .button.ghost{background:rgba(255,255,255,.9);border-color:rgba(15,23,42,.16);color:rgba(15,23,42,.88)}
 .button.ghost:hover{text-decoration:none;background:#fff}
@@ -151,7 +172,7 @@ a:hover{text-decoration:underline}
 .check{display:flex;align-items:center;gap:10px;margin-top:12px;color:rgba(15,23,42,.86);font-weight:800}
 .check input{width:18px;height:18px}
 
-.prompt-controls{display:grid;grid-template-columns:1fr 1fr auto;gap:12px;align-items:end}
+.prompt-controls{display:grid;grid-template-columns:1.2fr 1fr 1fr auto;gap:12px;align-items:end}
 .prompt-actions{display:flex;gap:10px;justify-content:flex-end}
 .prompt-view{
   margin-top:12px;
