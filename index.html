@@ -6,392 +6,445 @@
   <title>Juan Peco — Economía · Empresa · Turismo</title>
 
   <!-- SEO -->
-  <meta name="description" content="Juan Peco — Docente en Murcia (Economía, Empresa y Turismo). Metodología aplicada y laboratorio interactivo con simuladores y recursos didácticos." />
+  <meta name="description" content="Juan Peco — Docente en Murcia (Economía, Empresa y Turismo). Metodología aplicada y laboratorio interactivo con recursos didácticos y banco de prompts IA." />
   <meta name="keywords" content="Profesor Economía Murcia, Docente Administración de Empresas FP Murcia, Profesor Empresa Bachillerato Murcia, Economía Bachillerato, Empresa FP, Turismo FP, Digitalización educativa" />
   <meta name="author" content="Juan Peco" />
-
   <meta property="og:title" content="Juan Peco — Docencia aplicada al contexto real" />
-  <meta property="og:description" content="Web personal con metodología y laboratorio interactivo: test, simuladores y banco de prompts IA." />
+  <meta property="og:description" content="Metodología práctica + laboratorio interactivo + banco de prompts IA." />
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="es_ES" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --alt:#f7f9fc;
+      --ink:#0b1220;
+      --muted:rgba(11,18,32,.66);
+      --line:rgba(11,18,32,.12);
+      --accent:#2563eb;
+      --accent2:#1e3a8a;
+      --shadow:0 10px 30px rgba(11,18,32,.08);
+      --radius:16px;
+      --wrap:1120px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.65}
+    a{color:inherit}
+    code{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace}
+    .wrap{width:min(var(--wrap),calc(100% - 40px));margin:0 auto}
+    .muted{color:var(--muted)}
+    .small{font-size:13px}
+    .skip{position:absolute;left:-999px;top:10px;background:var(--ink);color:#fff;padding:10px 12px;border-radius:10px;z-index:9999}
+    .skip:focus{left:12px}
+
+    header.header{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+    .header-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 0;gap:14px}
+    .logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:800;letter-spacing:-.02em}
+    .dot{width:12px;height:12px;border-radius:6px;background:linear-gradient(135deg,var(--accent2),var(--accent));box-shadow:0 12px 30px rgba(37,99,235,.25)}
+
+    nav.nav{position:relative}
+    .nav-btn{display:none;border:1px solid var(--line);background:#fff;padding:10px 12px;border-radius:12px;font-weight:700}
+    .nav-list{display:flex;align-items:center;gap:10px;list-style:none;margin:0;padding:0}
+    .nav-list a{display:inline-flex;padding:10px 10px;border-radius:12px;text-decoration:none;color:rgba(11,18,32,.82);font-weight:700;font-size:14px}
+    .nav-list a:hover{background:rgba(37,99,235,.08);color:var(--ink)}
+    .nav-list a.cta{background:var(--ink);color:#fff}
+    .nav-list a.cta:hover{background:#070d19}
+
+    .hero{padding:78px 0 54px;position:relative;overflow:hidden}
+    .hero::before{
+      content:"";position:absolute;inset:-140px -80px auto -80px;height:460px;
+      background:
+        radial-gradient(680px 320px at 20% 35%, rgba(37,99,235,.18), transparent 60%),
+        radial-gradient(520px 280px at 70% 15%, rgba(30,58,138,.16), transparent 58%),
+        radial-gradient(520px 320px at 85% 85%, rgba(96,165,250,.16), transparent 60%);
+      pointer-events:none
+    }
+    .hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.2fr .8fr;gap:22px;align-items:start}
+    .kicker{margin:0 0 10px;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:rgba(37,99,235,.90)}
+    .hero h1{margin:0;font-size:clamp(40px,4.2vw,64px);letter-spacing:-.05em;line-height:1.03}
+    .sub{margin:10px 0 0;font-weight:800;color:rgba(11,18,32,.78)}
+    .lead{margin:16px 0 0;color:rgba(11,18,32,.84);max-width:60ch}
+    .quote{display:block;margin-top:10px;font-weight:800}
+    .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+    .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+    .tags span{border:1px solid var(--line);background:rgba(255,255,255,.65);padding:8px 10px;border-radius:999px;font-size:13px;color:rgba(11,18,32,.82)}
+
+    .section{padding:78px 0}
+    .section.alt{background:var(--alt);border-top:1px solid rgba(11,18,32,.06);border-bottom:1px solid rgba(11,18,32,.06)}
+    .head{margin-bottom:18px}
+    h2{margin:0 0 8px;font-size:clamp(24px,2.8vw,34px);letter-spacing:-.03em}
+    h3{margin:0 0 8px;letter-spacing:-.02em}
+
+    .card{background:#fff;border:1px solid rgba(11,18,32,.10);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px}
+    .card.soft{background:rgba(255,255,255,.72)}
+    .panel{background:rgba(255,255,255,.72);border:1px solid rgba(11,18,32,.10);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px}
+    .panel-title{margin:0 0 10px;font-weight:900;letter-spacing:-.02em}
+    .mini{margin:0;padding-left:18px;color:rgba(11,18,32,.86)}
+    .mini li{margin:6px 0}
+
+    .two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+    .grid5{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .stack{display:grid;gap:14px}
+
+    .accordion details{border:1px solid rgba(11,18,32,.10);border-radius:14px;padding:10px 12px;background:rgba(11,18,32,.02);margin-top:10px}
+    .accordion summary{cursor:pointer;font-weight:800}
+    .accordion p{margin:8px 0 0;color:rgba(11,18,32,.82)}
+
+    .stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .stat-k{margin:0;font-size:12px;font-weight:900;letter-spacing:.10em;text-transform:uppercase;color:rgba(11,18,32,.62)}
+    .stat-v{margin:6px 0 0;font-weight:900}
+
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:14px;padding:12px 14px;font-weight:800;border:1px solid transparent;text-decoration:none;cursor:pointer}
+    .btn.primary{background:linear-gradient(135deg,var(--accent2),var(--accent));color:#fff;box-shadow:0 18px 50px rgba(37,99,235,.18)}
+    .btn.ghost{background:#fff;border-color:rgba(11,18,32,.16);color:rgba(11,18,32,.88)}
+    .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    .row.right{justify-content:flex-end}
+
+    .tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+    .tab{border:1px solid rgba(11,18,32,.14);background:#fff;border-radius:999px;padding:10px 12px;font-weight:800;cursor:pointer}
+    .tab.is-active{background:rgba(37,99,235,.10);border-color:rgba(37,99,235,.30)}
+    .tabpane{display:none}
+    .tabpane.is-active{display:block}
+
+    .quiz fieldset{border:1px solid rgba(11,18,32,.10);border-radius:14px;padding:12px;margin:12px 0;background:rgba(11,18,32,.02)}
+    .quiz legend{font-weight:900}
+    .quiz label{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border-radius:12px;cursor:pointer}
+    .quiz label:hover{background:rgba(37,99,235,.06)}
+    .out{margin-top:12px;padding:12px;border-radius:14px;border:1px solid rgba(11,18,32,.12);background:#fff}
+    .out:empty{display:none}
+
+    .field{display:grid;gap:6px;margin-top:12px}
+    .field span{font-weight:900;font-size:13px;color:rgba(11,18,32,.74)}
+    .field input,.field select,.field textarea{
+      padding:12px;border-radius:14px;border:1px solid rgba(11,18,32,.18);font:inherit;resize:vertical
+    }
+    .field input:focus,.field select:focus,.field textarea:focus{
+      outline:none;border-color:rgba(37,99,235,.55);box-shadow:0 0 0 4px rgba(37,99,235,.14)
+    }
+
+    .prompt-controls{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:12px;align-items:end}
+    .prompt-view{
+      margin-top:12px;white-space:pre-wrap;background:rgba(11,18,32,.03);
+      border:1px solid rgba(11,18,32,.10);border-radius:14px;padding:12px;
+      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;
+      font-size:13px;color:rgba(11,18,32,.88)
+    }
+    .pill{
+      display:inline-flex;align-items:center;gap:8px;
+      border:1px solid rgba(11,18,32,.12);
+      background:rgba(255,255,255,.7);
+      padding:6px 10px;border-radius:999px;font-size:12px;color:rgba(11,18,32,.78)
+    }
+    .toast{
+      margin-top:10px;padding:10px 12px;border-radius:14px;border:1px solid rgba(11,18,32,.12);
+      background:rgba(11,18,32,.92);color:#fff;width:fit-content;
+      opacity:0;transform:translateY(6px);transition:opacity .18s ease,transform .18s ease
+    }
+    .toast.show{opacity:1;transform:translateY(0)}
+    .contact{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+    .contact li{display:grid;grid-template-columns:120px 1fr;gap:10px;padding:10px 12px;border-radius:14px;border:1px solid rgba(11,18,32,.10);background:rgba(11,18,32,.02)}
+
+    @media (max-width:980px){
+      .hero-grid{grid-template-columns:1fr}
+      .two{grid-template-columns:1fr}
+      .grid4{grid-template-columns:1fr 1fr}
+      .grid5{grid-template-columns:1fr 1fr}
+      .grid2{grid-template-columns:1fr}
+      .nav-btn{display:inline-flex}
+      .nav-list{
+        position:absolute;right:0;top:48px;width:min(320px,92vw);
+        display:none;flex-direction:column;align-items:stretch;gap:6px;
+        padding:10px;background:rgba(255,255,255,.96);
+        border:1px solid rgba(11,18,32,.12);border-radius:16px;box-shadow:var(--shadow)
+      }
+      .nav-list.open{display:flex}
+    }
+    @media (max-width:560px){
+      .grid4{grid-template-columns:1fr}
+      .grid5{grid-template-columns:1fr}
+      .prompt-controls{grid-template-columns:1fr}
+    }
+  </style>
 </head>
 
 <body>
-  <a class="skip-link" href="#main">Saltar al contenido</a>
+  <a class="skip" href="#main">Saltar al contenido</a>
 
-  <header class="site-header" id="top">
-    <div class="container header-inner">
-      <a class="brand-link" href="#top" aria-label="Ir al inicio">
-        <span class="brand-mark" aria-hidden="true"></span>
-        <span class="brand-text">JP</span>
+  <header class="header" id="top">
+    <div class="wrap header-inner">
+      <a class="logo" href="#top" aria-label="Inicio">
+        <span class="dot" aria-hidden="true"></span>
+        <span>JP</span>
       </a>
 
       <nav class="nav" aria-label="Navegación principal">
-        <button class="nav-toggle" type="button" aria-label="Abrir menú" aria-expanded="false">
-          <span class="nav-toggle-lines" aria-hidden="true"></span>
-        </button>
+        <button class="nav-btn" type="button" aria-label="Abrir menú" aria-expanded="false">Menú</button>
         <ul class="nav-list" id="navList">
-          <li><a class="nav-link" href="#sobre-mi">Sobre mí</a></li>
-          <li><a class="nav-link" href="#metodologia">Metodología</a></li>
-          <li><a class="nav-link" href="#laboratorio">Laboratorio</a></li>
-          <li><a class="nav-link" href="#areas">Áreas</a></li>
-          <li><a class="nav-link" href="#experiencia">Experiencia</a></li>
-          <li><a class="nav-link cta" href="#contacto">Contacto</a></li>
+          <li><a href="#sobre-mi">Sobre mí</a></li>
+          <li><a href="#metodologia">Metodología</a></li>
+          <li><a href="#laboratorio">Laboratorio</a></li>
+          <li><a href="#areas">Áreas</a></li>
+          <li><a href="#experiencia">Experiencia</a></li>
+          <li><a class="cta" href="#contacto">Contacto</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
   <main id="main">
-    <!-- HERO -->
-    <section class="section hero">
-      <div class="container hero-grid">
-        <div class="hero-copy reveal">
-          <p class="eyebrow">Docente · Murcia</p>
-          <h1 class="hero-title">
-            Juan Peco
-            <span class="hero-subtitle">Economía · Empresa · Turismo</span>
-          </h1>
-          <p class="hero-lead">
-            Docencia aplicada al contexto real
-            <span class="hero-quote">“Del aula a la empresa: aprender haciendo.”</span>
-          </p>
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <p class="kicker">Docente · Murcia</p>
+          <h1>Juan Peco</h1>
+          <p class="sub">Economía · Empresa · Turismo</p>
+          <p class="lead">Docencia aplicada al contexto real. <span class="quote">“Del aula a la empresa: aprender haciendo.”</span></p>
 
-          <div class="hero-actions">
-            <a class="button primary" href="#laboratorio">Ver laboratorio didáctico</a>
-            <a class="button ghost" href="#contacto">Contacto</a>
+          <div class="actions">
+            <a class="btn primary" href="#laboratorio">Ver laboratorio</a>
+            <a class="btn ghost" href="#contacto">Contacto</a>
           </div>
 
-          <div class="chips" aria-label="Etiquetas">
-            <span class="chip">Bachillerato</span>
-            <span class="chip">FP</span>
-            <span class="chip">Metodologías activas</span>
-            <span class="chip">IA responsable</span>
-            <span class="chip">Murcia</span>
+          <div class="tags" aria-label="Etiquetas">
+            <span>Bachillerato</span>
+            <span>FP</span>
+            <span>Metodologías activas</span>
+            <span>IA responsable</span>
           </div>
         </div>
 
-        <aside class="hero-card reveal">
-          <div class="card card--profile">
-            <div class="avatar" role="img" aria-label="Foto de perfil (opcional)">
-              <!-- Si quieres tu foto: guarda assets/avatar.jpg y descomenta -->
-              <!-- <img src="assets/avatar.jpg" alt="Foto de Juan Peco" loading="lazy" /> -->
-              <div class="avatar-fallback" aria-hidden="true"><span>JP</span></div>
-            </div>
-
-            <div class="profile-meta">
-              <p class="profile-role">Docente · Innovación educativa</p>
-              <p class="profile-location">Murcia, España</p>
-            </div>
-
-            <div class="mini-stats" role="list">
-              <div class="mini-stat" role="listitem">
-                <span class="mini-stat-label">Enfoque</span>
-                <span class="mini-stat-value">Competencias + contexto real</span>
-              </div>
-              <div class="mini-stat" role="listitem">
-                <span class="mini-stat-label">Especialidad</span>
-                <span class="mini-stat-value">Economía · Empresa · Turismo</span>
-              </div>
-              <div class="mini-stat" role="listitem">
-                <span class="mini-stat-label">Laboratorio</span>
-                <span class="mini-stat-value">Simuladores + recursos</span>
-              </div>
-            </div>
-
-            <a class="button small" href="#contacto">Escribir</a>
+        <aside class="hero-side">
+          <div class="panel">
+            <p class="panel-title">Enfoque</p>
+            <ul class="mini">
+              <li><strong>Competencias</strong> con evidencias</li>
+              <li><strong>Simulación</strong> y documentación real</li>
+              <li><strong>Datos</strong> (Excel/KPI)</li>
+              <li><strong>IA</strong> con criterio y verificación</li>
+            </ul>
+            <p class="muted small">Web estática + laboratorio + banco de prompts (500/50) listo para usar.</p>
           </div>
         </aside>
       </div>
     </section>
 
-    <!-- PERFIL -->
-    <section class="section alt" id="sobre-mi">
-      <div class="container">
-        <div class="section-head reveal">
+    <section class="section" id="sobre-mi">
+      <div class="wrap">
+        <div class="head">
           <h2>Perfil profesional</h2>
           <p class="muted">Base empresarial + docencia práctica + digitalización educativa.</p>
         </div>
 
-        <div class="grid-2">
-          <article class="card reveal">
-            <h3>Sobre mí</h3>
+        <div class="two">
+          <div class="card">
             <p>
               Docente de Formación Profesional y Educación Secundaria en Economía, Empresa y Turismo.
-              Máster en Formación del Profesorado (MAES, 2025, en curso), Máster en Marketing &amp; Digital Business
-              y Diplomatura en Ciencias Empresariales (homologado en España).
+              MAES (2025, en curso), Máster en Marketing &amp; Digital Business y Diplomatura en Ciencias Empresariales (homologado en España).
             </p>
 
-            <div class="note-list">
-              <div class="note"><span class="note-emoji">🎓</span><div><strong>Experiencia profesional</strong><p class="muted">Docencia + innovación educativa en centros de la Región de Murcia, con proyectos prácticos orientados a empleabilidad.</p></div></div>
-              <div class="note"><span class="note-emoji">🚀</span><div><strong>Programa Código Escuela 4.0</strong><p class="muted">Proyectos STEAM en más de 15 centros: robótica educativa, pensamiento computacional y ABP contextualizado.</p></div></div>
-              <div class="note"><span class="note-emoji">💡</span><div><strong>Especialización</strong><p class="muted">Competencia digital docente, metodologías activas (ABP, gamificación, aula invertida) e IA responsable con enfoque crítico.</p></div></div>
-              <div class="note"><span class="note-emoji">🎯</span><div><strong>Enfoque didáctico</strong><p class="muted">Empresas virtuales, documentación profesional, análisis de datos y dilemas empresariales. Evaluación por evidencias.</p></div></div>
-              <div class="note"><span class="note-emoji">🌐</span><div><strong>Transformación digital</strong><p class="muted">Herramientas colaborativas, análisis de datos educativos y automatización de procesos administrativos.</p></div></div>
-              <div class="note"><span class="note-emoji">📚</span><div><strong>Asesoramiento educativo</strong><p class="muted">Acompañamiento metodológico a equipos docentes: cambios sostenibles, formación digital y proyectos interdisciplinares.</p></div></div>
+            <div class="accordion">
+              <details open>
+                <summary>🎓 Experiencia profesional</summary>
+                <p>Docencia + innovación educativa en centros de la Región de Murcia, con proyectos prácticos orientados a empleabilidad.</p>
+              </details>
+              <details>
+                <summary>🚀 Programa Código Escuela 4.0</summary>
+                <p>Proyectos STEAM en más de 15 centros: robótica educativa, pensamiento computacional y ABP contextualizado.</p>
+              </details>
+              <details>
+                <summary>💡 Especialización</summary>
+                <p>Competencia digital docente, metodologías activas (ABP, gamificación, aula invertida) e IA responsable con enfoque crítico.</p>
+              </details>
+              <details>
+                <summary>🎯 Enfoque didáctico</summary>
+                <p>Empresas virtuales, documentación profesional, análisis de datos y dilemas empresariales. Evaluación por evidencias.</p>
+              </details>
             </div>
-          </article>
+          </div>
 
-          <aside class="card reveal">
-            <h3>Indicadores</h3>
-            <div class="stat-grid">
-              <div class="stat">
-                <div class="stat-k">Proyectos STEAM</div>
-                <div class="stat-v">En centros educativos</div>
-              </div>
-              <div class="stat">
-                <div class="stat-k">Materiales competenciales</div>
-                <div class="stat-v">Diseño y desarrollo</div>
-              </div>
-              <div class="stat">
-                <div class="stat-k">Asesoramiento metodológico</div>
-                <div class="stat-v">A equipos docentes</div>
-              </div>
-              <div class="stat">
-                <div class="stat-k">Integración de IA</div>
-                <div class="stat-v">Pedagogía responsable</div>
-              </div>
+          <div class="card soft">
+            <div class="stats">
+              <div><p class="stat-k">Proyectos STEAM</p><p class="stat-v">+15 centros</p></div>
+              <div><p class="stat-k">Materiales</p><p class="stat-v">Competenciales</p></div>
+              <div><p class="stat-k">Asesoramiento</p><p class="stat-v">A equipos</p></div>
+              <div><p class="stat-k">IA</p><p class="stat-v">Uso responsable</p></div>
             </div>
-
-            <div class="divider"></div>
-            <p class="muted small">Sugerencia: añade aquí enlaces a materiales, ejemplos o evidencias (Drive/Notion/portfolio).</p>
-          </aside>
+            <p class="muted small">Si quieres afinar el “look” a juanpeco.es: el estilo está centralizado en variables CSS arriba.</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- METODOLOGÍA -->
-    <section class="section" id="metodologia">
-      <div class="container">
-        <div class="section-head reveal">
-          <h2>Playbook didáctico</h2>
-          <p class="muted">Enfoque práctico centrado en competencias reales para el mundo profesional.</p>
+    <section class="section alt" id="metodologia">
+      <div class="wrap">
+        <div class="head">
+          <h2>Metodología aplicada</h2>
+          <p class="muted">Práctica, medible y orientada a desempeño.</p>
         </div>
 
-        <div class="cards-4">
-          <article class="card reveal">
-            <h3>Simulación empresarial</h3>
-            <p>Recreación de departamentos administrativos y decisiones reales. Empresas virtuales con roles y procesos.</p>
-          </article>
-          <article class="card reveal">
-            <h3>Documentación profesional</h3>
-            <p>Reglamentos, contratos, presupuestos e informes con herramientas digitales e IA responsable.</p>
-          </article>
-          <article class="card reveal">
-            <h3>Análisis con datos</h3>
-            <p>Excel para análisis financiero, viabilidad y lectura de indicadores económicos y empresariales.</p>
-          </article>
-          <article class="card reveal">
-            <h3>Evaluación competencial</h3>
-            <p>Rúbricas, evidencias reales y tareas contextualizadas. Evaluación formativa continua.</p>
-          </article>
+        <div class="grid4">
+          <div class="card"><h3>Simulación empresarial</h3><p>Departamentos, roles y decisiones reales. Gestión de empresa virtual.</p></div>
+          <div class="card"><h3>Documentación profesional</h3><p>Reglamentos, contratos, presupuestos e informes con estándares reales.</p></div>
+          <div class="card"><h3>Análisis con datos</h3><p>Excel, KPI, presupuestos y viabilidad: interpretar antes de decidir.</p></div>
+          <div class="card"><h3>Evaluación competencial</h3><p>Rúbricas + evidencias + feedback breve. Tareas contextualizadas.</p></div>
         </div>
       </div>
     </section>
 
-    <!-- LABORATORIO -->
-    <section class="section alt" id="laboratorio">
-      <div class="container">
-        <div class="section-head reveal">
+    <section class="section" id="laboratorio">
+      <div class="wrap">
+        <div class="head">
           <h2>Laboratorio interactivo</h2>
-          <p class="muted">Herramientas prácticas para el aprendizaje de economía y empresa.</p>
+          <p class="muted">Test + simuladores + banco de prompts (500 prompts / 50 categorías).</p>
         </div>
 
-        <div class="lab-grid">
-          <!-- TEST -->
-          <section class="card reveal" aria-labelledby="quizTitle">
-            <div class="card-head">
-              <h3 id="quizTitle">Test de Economía</h3>
-              <p class="muted">5 preguntas · feedback automático</p>
-            </div>
+        <div class="tabs" role="tablist" aria-label="Módulos del laboratorio">
+          <button class="tab is-active" role="tab" aria-selected="true" data-tab="tab-test">Test</button>
+          <button class="tab" role="tab" aria-selected="false" data-tab="tab-sim">Simuladores</button>
+          <button class="tab" role="tab" aria-selected="false" data-tab="tab-prompts">Prompts IA</button>
+        </div>
+
+        <!-- TAB: TEST -->
+        <section class="tabpane is-active" id="tab-test" role="tabpanel">
+          <div class="card">
+            <h3>Test de Economía</h3>
+            <p class="muted">5 preguntas · feedback automático (útil como recurso de aula).</p>
 
             <form id="quizForm" class="quiz">
-              <fieldset class="quiz-q">
+              <fieldset>
                 <legend>1) ¿Qué es el PIB?</legend>
-                <label class="option"><input type="radio" name="q1" value="a" required>El precio de los bienes importados</label>
-                <label class="option"><input type="radio" name="q1" value="b">El valor total de bienes y servicios producidos en un país</label>
-                <label class="option"><input type="radio" name="q1" value="c">La cantidad de dinero en circulación</label>
-                <label class="option"><input type="radio" name="q1" value="d">El índice de precios al consumo</label>
+                <label><input type="radio" name="q1" value="a" required> El precio de los bienes importados</label>
+                <label><input type="radio" name="q1" value="b"> El valor total de bienes y servicios producidos en un país</label>
+                <label><input type="radio" name="q1" value="c"> La cantidad de dinero en circulación</label>
+                <label><input type="radio" name="q1" value="d"> El índice de precios al consumo</label>
               </fieldset>
 
-              <fieldset class="quiz-q">
+              <fieldset>
                 <legend>2) Si el precio sube y la demanda baja, ¿qué ley se cumple?</legend>
-                <label class="option"><input type="radio" name="q2" value="a" required>Ley de la demanda</label>
-                <label class="option"><input type="radio" name="q2" value="b">Ley de la oferta</label>
-                <label class="option"><input type="radio" name="q2" value="c">Ley de Okun</label>
-                <label class="option"><input type="radio" name="q2" value="d">Curva de Phillips</label>
+                <label><input type="radio" name="q2" value="a" required> Ley de la demanda</label>
+                <label><input type="radio" name="q2" value="b"> Ley de la oferta</label>
+                <label><input type="radio" name="q2" value="c"> Ley de Okun</label>
+                <label><input type="radio" name="q2" value="d"> Curva de Phillips</label>
               </fieldset>
 
-              <fieldset class="quiz-q">
+              <fieldset>
                 <legend>3) El ROI mide…</legend>
-                <label class="option"><input type="radio" name="q3" value="a" required>El volumen de ventas</label>
-                <label class="option"><input type="radio" name="q3" value="b">La rentabilidad de una inversión</label>
-                <label class="option"><input type="radio" name="q3" value="c">La inflación mensual</label>
-                <label class="option"><input type="radio" name="q3" value="d">La liquidez bancaria</label>
+                <label><input type="radio" name="q3" value="a" required> El volumen de ventas</label>
+                <label><input type="radio" name="q3" value="b"> La rentabilidad de una inversión</label>
+                <label><input type="radio" name="q3" value="c"> La inflación mensual</label>
+                <label><input type="radio" name="q3" value="d"> La liquidez bancaria</label>
               </fieldset>
 
-              <fieldset class="quiz-q">
+              <fieldset>
                 <legend>4) Punto de equilibrio es…</legend>
-                <label class="option"><input type="radio" name="q4" value="a" required>Donde el beneficio es máximo</label>
-                <label class="option"><input type="radio" name="q4" value="b">Donde ingresos = costes</label>
-                <label class="option"><input type="radio" name="q4" value="c">Donde el impuesto es mínimo</label>
-                <label class="option"><input type="radio" name="q4" value="d">Donde el stock es cero</label>
+                <label><input type="radio" name="q4" value="a" required> Donde el beneficio es máximo</label>
+                <label><input type="radio" name="q4" value="b"> Donde ingresos = costes</label>
+                <label><input type="radio" name="q4" value="c"> Donde el impuesto es mínimo</label>
+                <label><input type="radio" name="q4" value="d"> Donde el stock es cero</label>
               </fieldset>
 
-              <fieldset class="quiz-q">
+              <fieldset>
                 <legend>5) DAFO significa…</legend>
-                <label class="option"><input type="radio" name="q5" value="a" required>Demanda, Ahorro, Financiación y Oferta</label>
-                <label class="option"><input type="radio" name="q5" value="b">Debilidades, Amenazas, Fortalezas y Oportunidades</label>
-                <label class="option"><input type="radio" name="q5" value="c">Descuento, Arancel, Flete y Origen</label>
-                <label class="option"><input type="radio" name="q5" value="d">Datos, Algoritmos, Funciones y Objetivos</label>
+                <label><input type="radio" name="q5" value="a" required> Demanda, Ahorro, Financiación y Oferta</label>
+                <label><input type="radio" name="q5" value="b"> Debilidades, Amenazas, Fortalezas y Oportunidades</label>
+                <label><input type="radio" name="q5" value="c"> Descuento, Arancel, Flete y Origen</label>
+                <label><input type="radio" name="q5" value="d"> Datos, Algoritmos, Funciones y Objetivos</label>
               </fieldset>
 
-              <div class="lab-actions">
-                <button class="button primary" type="submit">Corregir</button>
-                <button class="button ghost" type="button" id="quizReset">Reiniciar</button>
+              <div class="row">
+                <button class="btn primary" type="submit">Corregir</button>
+                <button class="btn ghost" type="button" id="quizReset">Reiniciar</button>
               </div>
 
-              <div class="feedback hidden" id="quizFeedback" aria-live="polite"></div>
+              <div class="out" id="quizFeedback" aria-live="polite"></div>
             </form>
-          </section>
+          </div>
+        </section>
 
-          <!-- PRESUPUESTO -->
-          <section class="card reveal" aria-labelledby="budgetTitle">
-            <div class="card-head">
-              <h3 id="budgetTitle">Simulador de Presupuesto</h3>
-              <p class="muted">Ej.: 50000 · recomendación rápida</p>
+        <!-- TAB: SIMS -->
+        <section class="tabpane" id="tab-sim" role="tabpanel">
+          <div class="grid2">
+            <div class="card">
+              <h3>Simulador de presupuesto</h3>
+              <p class="muted">Recomendación operativa + reparto orientativo (didáctico).</p>
+
+              <label class="field">
+                <span>Presupuesto (€)</span>
+                <input id="budgetInput" type="number" inputmode="numeric" min="0" step="100" placeholder="Ej.: 50000" />
+              </label>
+
+              <label class="field">
+                <span>Objetivo</span>
+                <select id="goalSelect">
+                  <option value="ventas">Aumentar ventas</option>
+                  <option value="costes">Reducir costes</option>
+                  <option value="marca">Mejorar marca</option>
+                  <option value="digital">Digitalización</option>
+                </select>
+              </label>
+
+              <button class="btn primary" id="simRun" type="button">Analizar</button>
+              <div class="out" id="simFeedback" aria-live="polite"></div>
             </div>
 
-            <label class="field">
-              <span>Presupuesto (€)</span>
-              <input id="budgetInput" type="number" inputmode="numeric" min="0" step="100" placeholder="Ej: 50000" />
-            </label>
-
-            <label class="field">
-              <span>Objetivo</span>
-              <select id="goalSelect">
-                <option value="ventas">Aumentar ventas</option>
-                <option value="costes">Reducir costes</option>
-                <option value="marca">Mejorar marca</option>
-                <option value="digital">Digitalización</option>
-              </select>
-            </label>
-
-            <button class="button primary" id="simRun" type="button">Analizar</button>
-            <div class="feedback hidden" id="simFeedback" aria-live="polite"></div>
-          </section>
-
-          <!-- ROI -->
-          <section class="card reveal" aria-labelledby="roiTitle">
-            <div class="card-head">
-              <h3 id="roiTitle">Calculadora de ROI</h3>
+            <div class="card">
+              <h3>Calculadora de ROI</h3>
               <p class="muted">ROI = (ganancia neta / inversión) × 100</p>
+
+              <label class="field"><span>Inversión (€)</span><input id="roiInv" type="number" inputmode="numeric" min="0" step="10" /></label>
+              <label class="field"><span>Ganancia neta (€)</span><input id="roiGain" type="number" inputmode="numeric" step="10" /></label>
+
+              <button class="btn primary" id="roiCalc" type="button">Calcular ROI</button>
+              <div class="out" id="roiOut" aria-live="polite"></div>
             </div>
 
-            <label class="field">
-              <span>Inversión (€)</span>
-              <input id="roiInv" type="number" inputmode="numeric" min="0" step="10" />
-            </label>
-            <label class="field">
-              <span>Ganancia neta (€)</span>
-              <input id="roiGain" type="number" inputmode="numeric" step="10" />
-            </label>
+            <div class="card">
+              <h3>Punto de equilibrio</h3>
+              <p class="muted">Unidades = costes fijos / (precio − coste unitario)</p>
 
-            <button class="button primary" id="roiCalc" type="button">Calcular ROI</button>
-            <div class="feedback hidden" id="roiOut" aria-live="polite"></div>
-          </section>
+              <label class="field"><span>Costes fijos (€)</span><input id="beFixed" type="number" inputmode="numeric" min="0" step="10" /></label>
+              <label class="field"><span>Precio unitario (€)</span><input id="bePrice" type="number" inputmode="numeric" min="0" step="0.01" /></label>
+              <label class="field"><span>Coste unitario (€)</span><input id="beCost" type="number" inputmode="numeric" min="0" step="0.01" /></label>
 
-          <!-- BREAK-EVEN -->
-          <section class="card reveal" aria-labelledby="beTitle">
-            <div class="card-head">
-              <h3 id="beTitle">Punto de equilibrio</h3>
-              <p class="muted">Unidades = costes fijos / (precio - coste unitario)</p>
+              <button class="btn primary" id="beCalc" type="button">Calcular</button>
+              <div class="out" id="beOut" aria-live="polite"></div>
             </div>
 
-            <label class="field"><span>Costes fijos (€)</span><input id="beFixed" type="number" inputmode="numeric" min="0" step="10" /></label>
-            <label class="field"><span>Precio unitario (€)</span><input id="bePrice" type="number" inputmode="numeric" min="0" step="0.01" /></label>
-            <label class="field"><span>Coste unitario (€)</span><input id="beCost" type="number" inputmode="numeric" min="0" step="0.01" /></label>
+            <div class="card">
+              <h3>DAFO rápido</h3>
+              <p class="muted">Borrador estructurado (para después validar con evidencia).</p>
 
-            <button class="button primary" id="beCalc" type="button">Calcular</button>
-            <div class="feedback hidden" id="beOut" aria-live="polite"></div>
-          </section>
+              <label class="field">
+                <span>Describe el negocio (2–4 líneas)</span>
+                <textarea id="dafoText" rows="4" placeholder="Ej.: cafetería de especialidad, público joven, ticket 6€, competencia alta..."></textarea>
+              </label>
 
-          <!-- DAFO -->
-          <section class="card reveal" aria-labelledby="dafoTitle">
-            <div class="card-head">
-              <h3 id="dafoTitle">DAFO rápido</h3>
-              <p class="muted">Describe el negocio y genera un borrador</p>
+              <button class="btn primary" id="dafoGen" type="button">Generar DAFO</button>
+              <div class="out" id="dafoOut" aria-live="polite"></div>
             </div>
+          </div>
+        </section>
 
-            <label class="field">
-              <span>Describe tu negocio (2–4 líneas)</span>
-              <textarea id="dafoText" rows="4" placeholder="Ej.: cafetería de especialidad en el centro, público joven, ticket medio 6€, mucha competencia cercana..."></textarea>
-            </label>
-
-            <button class="button primary" id="dafoGen" type="button">Generar DAFO</button>
-            <div class="feedback hidden" id="dafoOut" aria-live="polite"></div>
-          </section>
-
-          <!-- MÁRGENES -->
-          <section class="card reveal" aria-labelledby="marginTitle">
-            <div class="card-head">
-              <h3 id="marginTitle">Márgenes comerciales</h3>
-              <p class="muted">Margen = (venta - coste). % = margen / venta</p>
-            </div>
-
-            <label class="field"><span>Precio de coste (€)</span><input id="mCost" type="number" inputmode="numeric" min="0" step="0.01" /></label>
-            <label class="field"><span>Precio de venta (€)</span><input id="mSell" type="number" inputmode="numeric" min="0" step="0.01" /></label>
-
-            <button class="button primary" id="mCalc" type="button">Calcular</button>
-            <div class="feedback hidden" id="mOut" aria-live="polite"></div>
-          </section>
-
-          <!-- FACTURA -->
-          <section class="card reveal" aria-labelledby="invTitle">
-            <div class="card-head">
-              <h3 id="invTitle">Generador de factura</h3>
-              <p class="muted">Borrador simple (uso didáctico)</p>
-            </div>
-
-            <label class="field"><span>Concepto</span><input id="invConcept" type="text" placeholder="Servicio / producto" /></label>
-            <label class="field"><span>Importe base (€)</span><input id="invBase" type="number" inputmode="numeric" min="0" step="0.01" /></label>
-            <label class="check">
-              <input id="invIva" type="checkbox" checked />
-              <span>IVA 21%</span>
-            </label>
-
-            <button class="button primary" id="invGen" type="button">Generar</button>
-            <div class="feedback hidden" id="invOut" aria-live="polite"></div>
-          </section>
-
-          <!-- TRENDS -->
-          <section class="card reveal" aria-labelledby="trendTitle">
-            <div class="card-head">
-              <h3 id="trendTitle">Tendencias 2025</h3>
-              <p class="muted">Lista rápida (editable)</p>
-            </div>
-
-            <button class="button primary" id="trendShow" type="button">Ver tendencias</button>
-            <div class="feedback hidden" id="trendOut" aria-live="polite"></div>
-            <p class="muted small">Nota: ajusta esta lista según tu asignatura o sector.</p>
-          </section>
-
-          <!-- PROMPT BANK -->
-          <section class="card reveal lab-wide" aria-labelledby="promptTitle">
-            <div class="card-head">
-              <h3 id="promptTitle">Banco de Prompts IA</h3>
-              <p class="muted">50 categorías · 500 prompts · buscar y copiar</p>
-            </div>
+        <!-- TAB: PROMPTS -->
+        <section class="tabpane" id="tab-prompts" role="tabpanel">
+          <div class="card">
+            <h3>Banco de prompts IA (500)</h3>
+            <p class="muted">
+              Generados por plantillas profesionales (50 categorías × 10). Incluye IA recomendada y formato de salida.
+              <span class="pill" id="promptTotalPill">Cargando…</span>
+            </p>
 
             <div class="prompt-controls">
               <label class="field">
                 <span>Buscar (título o contenido)</span>
-                <input id="promptSearch" type="text" placeholder="Ej.: DAFO, presupuesto, contrato…" />
+                <input id="promptSearch" type="text" placeholder="Ej.: rúbrica, DAFO, presupuesto, contrato…" />
               </label>
 
               <label class="field">
@@ -403,114 +456,703 @@
                 <span>Prompt</span>
                 <select id="promptSelect"></select>
               </label>
+            </div>
 
-              <div class="prompt-actions">
-                <button class="button ghost" id="promptRandom" type="button">Aleatorio</button>
-                <button class="button primary" id="promptCopy" type="button">Copiar</button>
-              </div>
+            <div class="row right">
+              <button class="btn ghost" id="promptRandom" type="button">Aleatorio</button>
+              <button class="btn primary" id="promptCopy" type="button">Copiar</button>
             </div>
 
             <div class="muted small" id="promptCount"></div>
-
             <pre class="prompt-view" id="promptView">Cargando prompts…</pre>
             <div class="toast" id="toast" role="status" aria-live="polite" aria-hidden="true">Copiado</div>
-          </section>
-</div>
+
+            <p class="muted small">
+              Nota seria: no existe “100% garantizado” por cambios de modelos. Aquí se maximiza compatibilidad con estructura, restricciones y formato.
+            </p>
+          </div>
+        </section>
       </div>
     </section>
 
-    <!-- ÁREAS -->
-    <section class="section" id="areas">
-      <div class="container">
-        <div class="section-head reveal">
-          <h2>Áreas de trabajo</h2>
-        </div>
-
-        <div class="cards-5">
-          <div class="card reveal"><h3>Economía</h3><p class="muted">Bachillerato</p></div>
-          <div class="card reveal"><h3>Empresa</h3><p class="muted">Modelos de negocio</p></div>
-          <div class="card reveal"><h3>Gestión</h3><p class="muted">Administrativa (FP)</p></div>
-          <div class="card reveal"><h3>Turismo</h3><p class="muted">Empresa turística</p></div>
-          <div class="card reveal"><h3>Digitalización</h3><p class="muted">Aplicada a educación</p></div>
+    <section class="section alt" id="areas">
+      <div class="wrap">
+        <div class="head"><h2>Áreas de trabajo</h2></div>
+        <div class="grid5">
+          <div class="card"><h3>Economía</h3><p class="muted">Bachillerato</p></div>
+          <div class="card"><h3>Empresa</h3><p class="muted">Modelos de negocio</p></div>
+          <div class="card"><h3>Gestión</h3><p class="muted">Administrativa (FP)</p></div>
+          <div class="card"><h3>Turismo</h3><p class="muted">Empresa turística</p></div>
+          <div class="card"><h3>Digitalización</h3><p class="muted">Aplicada a educación</p></div>
         </div>
       </div>
     </section>
 
-    <!-- EXPERIENCIA -->
-    <section class="section alt" id="experiencia">
-      <div class="container">
-        <div class="section-head reveal">
-          <h2>Experiencia destacada</h2>
-        </div>
-
-        <div class="timeline">
-          <article class="card reveal">
-            <h3>2025 – Presente</h3>
-            <p><strong>Profesor — Programa Europeo Código Escuela 4.0</strong></p>
-            <ul class="bullets">
-              <li>Implementación de proyectos STEAM en más de 15 centros de la Región de Murcia.</li>
+    <section class="section" id="experiencia">
+      <div class="wrap">
+        <div class="head"><h2>Experiencia</h2></div>
+        <div class="stack">
+          <div class="card">
+            <p class="muted small">2025 – Presente</p>
+            <h3>Profesor — Programa Europeo Código Escuela 4.0</h3>
+            <ul>
+              <li>Proyectos STEAM en +15 centros de la Región de Murcia.</li>
               <li>Talleres de robótica y pensamiento computacional.</li>
               <li>Asesoramiento metodológico a equipos docentes.</li>
             </ul>
-          </article>
-
-          <article class="card reveal">
-            <h3>Formación (académico)</h3>
-            <ul class="bullets">
-              <li>MAES — Universidad de las Hespérides (2024–2025, en curso).</li>
+          </div>
+          <div class="card">
+            <h3>Formación</h3>
+            <ul>
+              <li>MAES (2024–2025, en curso).</li>
               <li>Máster en Marketing &amp; Digital Business.</li>
-              <li>Diplomatura en Ciencias Empresariales (homologado en España).</li>
+              <li>Diplomatura en Ciencias Empresariales (homologado).</li>
             </ul>
-          </article>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- CONTACTO -->
-    <section class="section" id="contacto">
-      <div class="container">
-        <div class="section-head reveal">
-          <h2>¿Hablamos?</h2>
-          <p class="muted">Si te interesa colaborar, compartir experiencias docentes o conversar sobre educación y empresa, escríbeme.</p>
+    <section class="section alt" id="contacto">
+      <div class="wrap">
+        <div class="head">
+          <h2>Contacto</h2>
+          <p class="muted">Colaborar, compartir recursos o conversar sobre educación y empresa.</p>
         </div>
 
-        <div class="contact-grid">
-          <div class="card reveal">
-            <h3>Contacto</h3>
-            <ul class="contact-list">
+        <div class="two">
+          <div class="card">
+            <ul class="contact">
               <li><span class="muted">Email</span><a href="mailto:contacto@juanpeco.es">contacto@juanpeco.es</a></li>
               <li><span class="muted">Ubicación</span><span>Murcia, España</span></li>
-              <li><span class="muted">LinkedIn</span><a href="#" aria-disabled="true">Añadir enlace</a></li>
+              <li><span class="muted">Web</span><a href="https://juanpeco.es/" target="_blank" rel="noopener">juanpeco.es</a></li>
             </ul>
-
-            <div class="hero-actions">
-              <a class="button primary" href="mailto:contacto@juanpeco.es">Enviar email</a>
-              <button class="button ghost" id="copyEmail" type="button" data-copy="contacto@juanpeco.es">Copiar email</button>
+            <div class="row">
+              <a class="btn primary" href="mailto:contacto@juanpeco.es">Enviar email</a>
+              <button class="btn ghost" id="copyEmail" type="button" data-copy="contacto@juanpeco.es">Copiar email</button>
             </div>
           </div>
 
-          <div class="card reveal">
-            <h3>Navegación</h3>
-            <div class="link-grid">
-              <a class="link-tile" href="#top">Inicio</a>
-              <a class="link-tile" href="#sobre-mi">Sobre mí</a>
-              <a class="link-tile" href="#laboratorio">Laboratorio</a>
-              <a class="link-tile" href="#contacto">Contacto</a>
+          <div class="card soft">
+            <p class="muted small">© <span id="year"></span> Juan Peco</p>
+            <div class="row">
+              <a class="btn ghost" href="#top">Inicio</a>
+              <a class="btn ghost" href="#laboratorio">Laboratorio</a>
             </div>
-            <p class="muted small">Puedes sustituir “contacto@” por “hola@” si quieres mantener consistencia con tu correo actual.</p>
           </div>
         </div>
-
-        <footer class="footer">
-          <div class="footer-inner">
-            <p class="muted">© <span id="year"></span> Juan Peco. Todos los derechos reservados.</p>
-            <a class="back-top" href="#top">Volver arriba ↑</a>
-          </div>
-        </footer>
       </div>
     </section>
   </main>
 
-  <script src="script.js"></script>
+  <script>
+    (function(){
+      // year
+      const yearEl = document.getElementById('year');
+      if(yearEl) yearEl.textContent = String(new Date().getFullYear());
+
+      // mobile nav
+      const btn = document.querySelector('.nav-btn');
+      const nav = document.getElementById('navList');
+      if(btn && nav){
+        btn.addEventListener('click', () => {
+          const open = nav.classList.toggle('open');
+          btn.setAttribute('aria-expanded', String(open));
+        });
+        nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+          nav.classList.remove('open');
+          btn.setAttribute('aria-expanded','false');
+        }));
+        document.addEventListener('click', (e) => {
+          const t = e.target;
+          if(!t) return;
+          if(nav.contains(t) || btn.contains(t)) return;
+          nav.classList.remove('open');
+          btn.setAttribute('aria-expanded','false');
+        });
+      }
+
+      // tabs
+      const tabs = Array.from(document.querySelectorAll('.tab'));
+      const panes = Array.from(document.querySelectorAll('.tabpane'));
+      function activate(id){
+        tabs.forEach(t => {
+          const on = t.dataset.tab === id;
+          t.classList.toggle('is-active', on);
+          t.setAttribute('aria-selected', on ? 'true' : 'false');
+        });
+        panes.forEach(p => p.classList.toggle('is-active', p.id === id));
+      }
+      tabs.forEach(t => t.addEventListener('click', () => activate(t.dataset.tab)));
+
+      // helpers
+      const eur = (n) => {
+        if(!Number.isFinite(n)) return '—';
+        try{ return new Intl.NumberFormat('es-ES',{style:'currency',currency:'EUR',maximumFractionDigits:2}).format(n); }
+        catch{ return `${n.toFixed(2)} €`; }
+      };
+      const pct = (n) => Number.isFinite(n) ? `${n.toFixed(2)}%` : '—';
+      const esc = (s) => String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
+
+      // toast + copy
+      const toast = document.getElementById('toast');
+      let toastTimer = null;
+      function showToast(msg='Copiado'){
+        if(!toast) return;
+        toast.textContent = msg;
+        toast.classList.add('show');
+        toast.setAttribute('aria-hidden','false');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(()=>{
+          toast.classList.remove('show');
+          toast.setAttribute('aria-hidden','true');
+        }, 1400);
+      }
+      async function copyText(text){
+        try{ await navigator.clipboard.writeText(text); return true; }
+        catch{
+          const ta = document.createElement('textarea');
+          ta.value = text;
+          document.body.appendChild(ta);
+          ta.select();
+          const ok = document.execCommand('copy');
+          document.body.removeChild(ta);
+          return ok;
+        }
+      }
+
+      // quiz
+      const quizForm = document.getElementById('quizForm');
+      const quizFeedback = document.getElementById('quizFeedback');
+      const quizReset = document.getElementById('quizReset');
+      const quizAnswers = {
+        q1:{correct:'b', why:'PIB: valor total de bienes y servicios finales producidos en un país (en un periodo).'},
+        q2:{correct:'a', why:'Ley de la demanda: precio ↑ → cantidad demandada ↓ (ceteris paribus).'},
+        q3:{correct:'b', why:'ROI: rentabilidad de una inversión (ganancia respecto a lo invertido).'},
+        q4:{correct:'b', why:'Punto de equilibrio: ingresos = costes (beneficio 0).'},
+        q5:{correct:'b', why:'DAFO: Debilidades, Amenazas, Fortalezas y Oportunidades.'}
+      };
+      if(quizForm && quizFeedback){
+        quizForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const data = new FormData(quizForm);
+          let score = 0;
+          const details = [];
+          Object.keys(quizAnswers).forEach((k, i) => {
+            const user = data.get(k);
+            const a = quizAnswers[k];
+            const ok = user === a.correct;
+            if(ok) score++;
+            details.push(`<div style="display:grid;gap:4px;"><strong>${i+1}) ${ok ? '✅ Correcto' : '❌ A mejorar'}</strong><div class="muted">${esc(a.why)}</div></div>`);
+          });
+          const percent = Math.round((score/5)*100);
+          const headline = percent === 100 ? 'Perfecto.' : percent >= 80 ? 'Muy bien.' : percent >= 60 ? 'Bien, con margen.' : 'Vamos a afinarlo.';
+          quizFeedback.innerHTML = `<div><strong>${headline}</strong> Puntuación: ${score}/5 (${percent}%)</div><div style="margin-top:10px;display:grid;gap:10px;">${details.join('')}</div>`;
+        });
+        if(quizReset){
+          quizReset.addEventListener('click', () => {
+            quizForm.reset();
+            quizFeedback.innerHTML = '';
+          });
+        }
+      }
+
+      // budget sim
+      const budgetInput = document.getElementById('budgetInput');
+      const goalSelect = document.getElementById('goalSelect');
+      const simRun = document.getElementById('simRun');
+      const simFeedback = document.getElementById('simFeedback');
+
+      function budgetRec(b, goal){
+        const packs = {
+          ventas:{title:'Estrategia: crecimiento de ventas', split:[['Captación (ads / RRSS)',0.45],['Mejora de oferta',0.30],['Fidelización (CRM simple)',0.25]], why:'Adquisición medible y seguimiento por KPI.'},
+          costes:{title:'Estrategia: eficiencia y costes', split:[['Auditoría de procesos',0.35],['Automatización (plantillas)',0.40],['Formación interna',0.25]], why:'Estandariza para reducir errores y tiempos.'},
+          marca:{title:'Estrategia: marca coherente', split:[['Mensajes y guía',0.35],['Contenido y calendario',0.40],['Experiencia cliente',0.25]], why:'Consistencia > acciones sueltas.'},
+          digital:{title:'Estrategia: digitalización práctica', split:[['Herramientas',0.40],['Datos y KPI',0.35],['Protocolos',0.25]], why:'Orden primero, automatización después.'}
+        };
+        const p = packs[goal] || packs.ventas;
+        const rows = p.split.map(([label, w]) => `<li style="display:flex;justify-content:space-between;gap:12px;"><span>${esc(label)}</span><strong>${eur(b*w)}</strong></li>`).join('');
+        return `<div><strong>${esc(p.title)}</strong></div>
+          <p><strong>Presupuesto:</strong> ${eur(b)}</p>
+          <p class="muted">${esc(p.why)}</p>
+          <div style="margin-top:10px;border:1px solid rgba(11,18,32,.10);border-radius:14px;padding:12px;background:rgba(11,18,32,.02);">
+            <p style="margin:0 0 8px;"><strong>Reparto orientativo</strong> (didáctico):</p>
+            <ul style="margin:0;padding-left:18px;display:grid;gap:6px;">${rows}</ul>
+          </div>
+          <p class="muted small" style="margin-top:10px;">Siguiente paso: define 2–3 KPI y revisión semanal.</p>`;
+      }
+      if(simRun && simFeedback){
+        simRun.addEventListener('click', () => {
+          const b = Number(budgetInput?.value || 0);
+          if(!Number.isFinite(b) || b <= 0){
+            simFeedback.innerHTML = '<strong>Introduce un presupuesto válido.</strong> Ej.: 50000';
+            return;
+          }
+          const goal = goalSelect?.value || 'ventas';
+          simFeedback.innerHTML = budgetRec(b, goal);
+        });
+      }
+
+      // ROI
+      const roiInv = document.getElementById('roiInv');
+      const roiGain = document.getElementById('roiGain');
+      const roiCalc = document.getElementById('roiCalc');
+      const roiOut = document.getElementById('roiOut');
+      if(roiCalc && roiOut){
+        roiCalc.addEventListener('click', () => {
+          const inv = Number(roiInv?.value || 0);
+          const gain = Number(roiGain?.value || 0);
+          if(!Number.isFinite(inv) || inv <= 0){
+            roiOut.innerHTML = '<strong>La inversión debe ser &gt; 0.</strong>';
+            return;
+          }
+          const r = (gain / inv) * 100;
+          roiOut.innerHTML = `<div><strong>ROI:</strong> ${pct(r)}</div><div class="muted small">Ganancia neta: ${eur(gain)} sobre inversión ${eur(inv)}.</div>`;
+        });
+      }
+
+      // Break-even
+      const beFixed = document.getElementById('beFixed');
+      const bePrice = document.getElementById('bePrice');
+      const beCost = document.getElementById('beCost');
+      const beCalc = document.getElementById('beCalc');
+      const beOut = document.getElementById('beOut');
+      if(beCalc && beOut){
+        beCalc.addEventListener('click', () => {
+          const fixed = Number(beFixed?.value || 0);
+          const price = Number(bePrice?.value || 0);
+          const cost = Number(beCost?.value || 0);
+          const margin = price - cost;
+          if(!Number.isFinite(fixed) || fixed < 0 || !Number.isFinite(price) || price <= 0 || !Number.isFinite(cost) || cost < 0){
+            beOut.innerHTML = '<strong>Revisa los valores.</strong>';
+            return;
+          }
+          if(margin <= 0){
+            beOut.innerHTML = '<strong>El margen unitario debe ser &gt; 0.</strong> (precio &gt; coste unitario)';
+            return;
+          }
+          const units = fixed / margin;
+          beOut.innerHTML = `<div><strong>Punto de equilibrio:</strong> ${units.toFixed(2)} unidades</div><div class="muted small">Margen unitario: ${eur(margin)} · Ingresos necesarios: ${eur(units * price)}</div>`;
+        });
+      }
+
+      // DAFO
+      const dafoText = document.getElementById('dafoText');
+      const dafoGen = document.getElementById('dafoGen');
+      const dafoOut = document.getElementById('dafoOut');
+      if(dafoGen && dafoOut){
+        dafoGen.addEventListener('click', () => {
+          const t = (dafoText?.value || '').trim();
+          if(t.length < 10){
+            dafoOut.innerHTML = '<strong>Escribe una descripción un poco más concreta.</strong>';
+            return;
+          }
+          const fort = ['Propuesta de valor clara', 'Segmento definido', 'Servicio diferenciable'];
+          const deb  = ['Dependencia de un canal', 'Procesos no estandarizados', 'Márgenes ajustados si no se controla el coste'];
+          const op   = ['Colaboraciones locales', 'Fidelización digital', 'Tendencias de experiencia/servicio'];
+          const ame  = ['Competencia intensa', 'Subida de costes', 'Estacionalidad/cambios de demanda'];
+
+          dafoOut.innerHTML = `<div><strong>DAFO (borrador)</strong></div>
+            <p class="muted small">Revisa y concreta con evidencia:</p>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px;">
+              <div style="border:1px solid rgba(11,18,32,.10);border-radius:14px;padding:12px;background:rgba(11,18,32,.02);">
+                <strong>Fortalezas</strong>
+                <ul style="margin:8px 0 0;padding-left:18px;display:grid;gap:6px;">${fort.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>
+              </div>
+              <div style="border:1px solid rgba(11,18,32,.10);border-radius:14px;padding:12px;background:rgba(11,18,32,.02);">
+                <strong>Debilidades</strong>
+                <ul style="margin:8px 0 0;padding-left:18px;display:grid;gap:6px;">${deb.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>
+              </div>
+              <div style="border:1px solid rgba(11,18,32,.10);border-radius:14px;padding:12px;background:rgba(11,18,32,.02);">
+                <strong>Oportunidades</strong>
+                <ul style="margin:8px 0 0;padding-left:18px;display:grid;gap:6px;">${op.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>
+              </div>
+              <div style="border:1px solid rgba(11,18,32,.10);border-radius:14px;padding:12px;background:rgba(11,18,32,.02);">
+                <strong>Amenazas</strong>
+                <ul style="margin:8px 0 0;padding-left:18px;display:grid;gap:6px;">${ame.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>
+              </div>
+            </div>
+            <div style="margin-top:10px;"><strong>Tu texto:</strong><div class="muted" style="margin-top:6px;">${esc(t)}</div></div>`;
+        });
+      }
+
+      // Copy email
+      const copyEmailBtn = document.getElementById('copyEmail');
+      if(copyEmailBtn){
+        copyEmailBtn.addEventListener('click', async () => {
+          const email = copyEmailBtn.getAttribute('data-copy') || '';
+          const ok = await copyText(email);
+          showToast(ok ? 'Email copiado' : 'No se pudo copiar');
+        });
+      }
+
+      // ---------------------------
+      // PROMPT BANK (50 x 10 = 500)
+      // ---------------------------
+
+      // “Apps” recomendadas: alta compatibilidad (no “100% garantizado”).
+      const AI_PROFILES = [
+        { id: "chatgpt", label: "ChatGPT (GPT-4o/4.1) — Alta compatibilidad" },
+        { id: "claude",  label: "Claude 3.5 — Alta compatibilidad" },
+        { id: "gemini",  label: "Gemini 1.5 — Alta compatibilidad" }
+      ];
+
+      // 50 categorías: mezcla FP/Bach + empresa real + evaluación.
+      const CATEGORIES = [
+        "Simulación empresarial (FP)",
+        "Documentación administrativa (FP)",
+        "Contabilidad aplicada (FP)",
+        "Fiscalidad básica (FP)",
+        "Análisis financiero y ratios",
+        "Presupuestos y control de gestión",
+        "Marketing digital y estrategia",
+        "Modelo de negocio y propuesta de valor",
+        "DAFO/PESTEL/Canvas",
+        "Operaciones y procesos",
+        "Recursos humanos y PRL",
+        "Atención al cliente y servicio",
+        "Economía macro (Bachillerato)",
+        "Economía micro (Bachillerato)",
+        "Mercados y competencia",
+        "Inflación, empleo y ciclo",
+        "Política fiscal y monetaria",
+        "Globalización y comercio exterior",
+        "Empresa en Bachillerato",
+        "Emprendimiento y startups",
+        "Turismo: producto y mercado",
+        "Turismo: operaciones y calidad",
+        "Turismo: sostenibilidad y ODS",
+        "Digitalización empresarial",
+        "Excel: análisis y dashboards",
+        "Excel: casos evaluables",
+        "Competencia digital docente",
+        "Evaluación competencial (rúbricas)",
+        "Situaciones de aprendizaje (LOMLOE)",
+        "ABP: proyectos empresariales",
+        "Gamificación no infantil",
+        "Aula invertida (flipped)",
+        "Aprendizaje cooperativo",
+        "Debate y pensamiento crítico",
+        "Casos reales (Murcia/entorno)",
+        "Comunicación profesional",
+        "Presentaciones y defensa oral",
+        "Portafolio y evidencias",
+        "Diseño de actividades inclusivas",
+        "Atención a la diversidad",
+        "Orientación académica y profesional",
+        "Ética y uso responsable de IA",
+        "Detección de errores y verificación",
+        "Creación de materiales (fichas)",
+        "Exámenes y bancos de preguntas",
+        "Corrección con feedback",
+        "Autoevaluación y coevaluación",
+        "Planes de mejora del centro",
+        "Relación con empresas (FP Dual)",
+        "Innovación educativa aplicada"
+      ];
+
+      // 10 plantillas (prompts) por categoría.
+      // Cada plantilla genera un prompt completo: objetivo + entradas + restricciones + formato salida + checklist.
+      const TEMPLATES_10 = [
+        {
+          title: (cat) => `Diagnóstico profesional en 15 minutos — ${cat}`,
+          ai: "chatgpt",
+          build: (cat) => (
+`IA recomendada: ChatGPT (GPT-4o/4.1) — Alta compatibilidad
+Objetivo: diagnóstico accionable y evaluable.
+
+Rol: actúa como consultor senior (España) con enfoque docente.
+Contexto (pega aquí): [DESCRIPCIÓN DEL CASO / EMPRESA / CONTEXTO DE AULA]
+
+Entregable (formato obligatorio):
+1) Situación (3 bullets)
+2) Problema principal (1 frase)
+3) 3 causas (máx. 1 línea cada una)
+4) 3 acciones recomendadas (con prioridad Alta/Media/Baja)
+5) Indicadores (2 KPI por acción) + cómo medirlos en clase
+6) Riesgos (2) y mitigación
+
+Restricciones:
+- No inventes datos externos.
+- Evita frases vacías.
+- Máx. 350 palabras.
+
+Checklist de calidad:
+- ¿Cada acción tiene KPI?
+- ¿Hay coherencia causa→acción?
+- ¿Se puede evaluar con evidencias?`)
+        },
+        {
+          title: (cat) => `Rúbrica competencial lista para usar — ${cat}`,
+          ai: "chatgpt",
+          build: (cat) => (
+`IA recomendada: ChatGPT (GPT-4o/4.1) — Alta compatibilidad
+Objetivo: rúbrica evaluable por competencias (LOMLOE) sin humo.
+
+Rol: actúa como docente experto en evaluación competencial.
+Actividad (pega aquí): [TAREA / PRODUCTO FINAL]
+Nivel: [Bachillerato / FP]  Curso: [X]  Duración: [sesiones]
+
+Genera una rúbrica con:
+- 4 criterios (claros, observables)
+- 4 niveles (Insuficiente/Suficiente/Notable/Sobresaliente)
+- Evidencias concretas por nivel (no genéricas)
+- Peso % por criterio (suma 100%)
+
+Formato: tabla Markdown.
+Cierra con “Cómo recoger evidencias” (máx. 6 líneas).`)
+        },
+        {
+          title: (cat) => `Situación de aprendizaje (LOMLOE) — ${cat}`,
+          ai: "claude",
+          build: (cat) => (
+`IA recomendada: Claude 3.5 — Alta compatibilidad
+Rol: diseñador curricular. Crea una Situación de Aprendizaje para ${cat}.
+
+Datos:
+- Nivel: [Bachillerato/FP]
+- Contexto (Murcia si aplica): [CONTEXTO]
+- Producto final: [ENTREGABLE]
+- Evaluación: por evidencias
+
+Debe incluir:
+1) Reto (con contexto realista)
+2) Secuencia de tareas (5 pasos)
+3) Recursos (incluye 1 herramienta digital)
+4) Evaluación (rúbrica resumida con 3 criterios)
+5) Atención a la diversidad (2 medidas)
+6) Evidencias y temporalización
+
+Estilo: directo, sin relleno. No cites normativa literal.`)
+        },
+        {
+          title: (cat) => `Caso práctico con solución y criterios — ${cat}`,
+          ai: "gemini",
+          build: (cat) => (
+`IA recomendada: Gemini 1.5 — Alta compatibilidad
+Rol: creador de casos prácticos evaluables en ${cat}.
+
+Entrada: [TEMA]  Nivel: [Bach/FP]  Dificultad: [Baja/Media/Alta]
+
+Entrega:
+A) Enunciado (datos suficientes, realista)
+B) 5 preguntas (mezcla cálculo/razonamiento)
+C) Solución paso a paso
+D) Criterios de corrección (puntos por apartado)
+E) Errores típicos (3)
+
+No inventes datos irreales. Mantén consistencia numérica.`)
+        },
+        {
+          title: (cat) => `Corrección con feedback breve (docente) — ${cat}`,
+          ai: "chatgpt",
+          build: (cat) => (
+`IA recomendada: ChatGPT (GPT-4o/4.1) — Alta compatibilidad
+Rol: docente corrector. Evalúa este trabajo:
+
+[PEGAR TRABAJO DEL ALUMNO]
+
+Criterios (pega): [RÚBRICA O LISTA DE CRITERIOS]
+
+Entrega:
+1) Nota orientativa (0–10) + justificación (máx. 4 líneas)
+2) 3 aciertos concretos
+3) 3 mejoras concretas (accionables)
+4) “Siguiente paso” (1 tarea de mejora)
+
+Prohibido: moralinas, generalidades, frases tipo “buen trabajo”.`)
+        },
+        {
+          title: (cat) => `Documento profesional listo para Word — ${cat}`,
+          ai: "chatgpt",
+          build: (cat) => (
+`IA recomendada: ChatGPT (GPT-4o/4.1) — Alta compatibilidad
+Rol: técnico administrativo (España). Redacta un documento profesional para ${cat}.
+
+Datos a completar:
+- Empresa/centro: [NOMBRE]
+- Contexto: [CASO]
+- Fecha: [DD/MM/AAAA]
+
+Requisitos:
+- Estructura con títulos y numeración
+- Lenguaje formal y claro
+- Plantilla rellenable (campos [ ] donde falte info)
+
+Salida:
+- Documento en formato de texto listo para pegar en Word.
+- Incluye al final un “Checklist de revisión” (10 ítems).`)
+        },
+        {
+          title: (cat) => `Plan de mejora basado en datos — ${cat}`,
+          ai: "gemini",
+          build: (cat) => (
+`IA recomendada: Gemini 1.5 — Alta compatibilidad
+Rol: analista. Con estos datos:
+
+[PEGA TABLA O RESUMEN DE DATOS]
+
+Objetivo: proponer un plan de mejora en ${cat}.
+
+Entrega:
+1) Hallazgos (máx. 5)
+2) Hipótesis explicativas (3)
+3) Acciones (5) con esfuerzo (Bajo/Medio/Alto) e impacto (Bajo/Medio/Alto)
+4) KPI por acción
+5) Riesgos y supuestos
+
+No uses jerga vacía. Si falta info, dilo explícitamente.`)
+        },
+        {
+          title: (cat) => `Generador de preguntas tipo examen — ${cat}`,
+          ai: "claude",
+          build: (cat) => (
+`IA recomendada: Claude 3.5 — Alta compatibilidad
+Crea un mini-banco de examen sobre ${cat}.
+
+Entrada: nivel [Bach/FP], tema [TEMA], dificultad [Baja/Media/Alta].
+
+Salida:
+- 8 preguntas tipo test (4 opciones) + solución razonada (1–2 líneas)
+- 2 preguntas de desarrollo + esquema de corrección
+- 1 ejercicio práctico + solución
+
+Condición: evita preguntas triviales; prioriza aplicación y razonamiento.`)
+        },
+        {
+          title: (cat) => `Actividad ABP (proyecto) con entregables — ${cat}`,
+          ai: "chatgpt",
+          build: (cat) => (
+`IA recomendada: ChatGPT (GPT-4o/4.1) — Alta compatibilidad
+Diseña un ABP para ${cat}.
+
+Datos:
+- Nivel: [Bach/FP]
+- Duración: [sesiones]
+- Producto final: [ENTREGABLE]
+- Contexto: [empresa real / caso local]
+
+Entrega:
+1) Pregunta guía
+2) Entregables (mínimo 4) con criterios de aceptación
+3) Roles y responsabilidades
+4) Cronograma por sesiones
+5) Evaluación (rúbrica breve + evidencias)
+6) Plan de contingencia (2 riesgos)
+
+Todo debe ser aplicable, sin relleno.`)
+        },
+        {
+          title: (cat) => `Verificación y “antialucinación” — ${cat}`,
+          ai: "chatgpt",
+          build: (cat) => (
+`IA recomendada: ChatGPT (GPT-4o/4.1) — Alta compatibilidad
+Rol: revisor crítico. Audita este contenido generado por IA:
+
+[PEGA EL TEXTO]
+
+Objetivo: detectar errores, supuestos no justificados y puntos débiles en ${cat}.
+
+Entrega:
+1) Lista de afirmaciones verificables (máx. 10)
+2) Qué evidencia pedirías para cada una
+3) Qué partes son opinión / interpretación
+4) Reescritura breve (máx. 180 palabras) eliminando lo dudoso
+
+No inventes fuentes. Si no se puede verificar, dilo.`)
+        }
+      ];
+
+      function pickAI(id){
+        return AI_PROFILES.find(x => x.id === id) || AI_PROFILES[0];
+      }
+
+      // Genera 500 prompts (50 categorías x 10 templates)
+      function generatePromptBank(){
+        const bank = [];
+        for(const cat of CATEGORIES){
+          for(const tpl of TEMPLATES_10){
+            const profile = pickAI(tpl.ai);
+            const title = tpl.title(cat);
+            const text = tpl.build(cat);
+            bank.push({ category: cat, title, ai: profile.label, text });
+          }
+        }
+        return bank;
+      }
+
+      // UI wiring
+      const elCat = document.getElementById('promptCategory');
+      const elSel = document.getElementById('promptSelect');
+      const elView = document.getElementById('promptView');
+      const elCopy = document.getElementById('promptCopy');
+      const elRandom = document.getElementById('promptRandom');
+      const elSearch = document.getElementById('promptSearch');
+      const elCount = document.getElementById('promptCount');
+      const elPill = document.getElementById('promptTotalPill');
+
+      if(elCat && elSel && elView){
+        const bank = generatePromptBank();
+        const cats = [...new Set(bank.map(p => p.category))].sort((a,b)=>a.localeCompare(b,'es'));
+        if(elPill) elPill.textContent = `${bank.length} prompts · ${cats.length} categorías`;
+
+        elCat.innerHTML = cats.map(c => `<option value="${esc(c)}">${esc(c)}</option>`).join('');
+
+        function listFor(category, query){
+          const q = (query || '').trim().toLowerCase();
+          const list = bank.filter(p => p.category === category);
+          if(!q) return list;
+          return list.filter(p => p.title.toLowerCase().includes(q) || p.text.toLowerCase().includes(q));
+        }
+
+        function renderList(){
+          const list = listFor(elCat.value, elSearch?.value || '');
+          elSel.innerHTML = list.map((p,i)=>`<option value="${i}">${esc(p.title)}</option>`).join('');
+          if(list.length){
+            elView.textContent = `${pHeader(list[0])}\n\n${list[0].text}`;
+            if(elCount) elCount.textContent = `${list.length} prompts (filtrados)`;
+          }else{
+            elView.textContent = 'No hay resultados con ese filtro.';
+            if(elCount) elCount.textContent = '0 resultados';
+          }
+        }
+
+        function pHeader(p){
+          return `Título: ${p.title}\nCategoría: ${p.category}\nRecomendado: ${p.ai}`;
+        }
+
+        function setView(){
+          const list = listFor(elCat.value, elSearch?.value || '');
+          const i = Number(elSel.value || 0);
+          const p = list[i];
+          if(!p){ elView.textContent = 'Selecciona un prompt.'; return; }
+          elView.textContent = `${pHeader(p)}\n\n${p.text}`;
+        }
+
+        renderList();
+
+        elCat.addEventListener('change', renderList);
+        elSel.addEventListener('change', setView);
+        if(elSearch) elSearch.addEventListener('input', renderList);
+
+        if(elRandom){
+          elRandom.addEventListener('click', () => {
+            const list = listFor(elCat.value, elSearch?.value || '');
+            if(!list.length) return;
+            const i = Math.floor(Math.random()*list.length);
+            elSel.value = String(i);
+            setView();
+          });
+        }
+
+        if(elCopy){
+          elCopy.addEventListener('click', async () => {
+            const ok = await copyText(elView.textContent || '');
+            showToast(ok ? 'Prompt copiado' : 'No se pudo copiar');
+          });
+        }
+      }
+    })();
+  </script>
 </body>
 </html>
